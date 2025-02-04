@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='diabetesimage.jpeg') }}" alt="Diabetes Image">
+        </div>
+
+        <div class="result {% if prediction[0] == 1 %}result-yes{% else %}result-no{% endif %}">
+            {% if prediction[0] == 1 %}
+                <strong>The model predicts that you are likely to have diabetes.</strong>
+                <p>It's important to consult a healthcare professional for further tests and advice.</p>
+            {% else %}
+                <strong>The model predicts that you are not likely to have diabetes.</strong>
+                <p>Keep maintaining a healthy lifestyle and monitor your health regularly.</p>
+            {% endif %}
+        </div>
+
+        <a href="/">Go Back</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

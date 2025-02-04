@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diapredict</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+<!-- Header/Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">Diapredict</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#predict">Start Prediction</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Carousel Section -->
+<div id="mainCarousel" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="3000"> <!-- 3000ms = 3 seconds -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='image2.png') }}" class="d-block w-100" alt="Slide 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='image.png') }}" class="d-block w-100" alt="Slide 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='image3.png') }}" class="d-block w-100" alt="Slide 3">
+    </div>
+  </div>
+  <!-- Controls (optional) -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- Additional CSS for image fit -->
+<style>
+  #mainCarousel .carousel-inner img {
+    object-fit: cover; /* Ensures the images cover the space without distortion */
+    height: 500px; /* You can adjust this value depending on the desired height of your images */
+  }
+</style>
+
+
+
+<!-- Form Section -->
+<section class="form-section" id="predict">
+  <h2 class="text-center mb-4">Enter Your Details</h2>
+  <form action="/predict" method="POST" id="diabetesForm">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="pregnancies" class="form-label">Pregnancies</label>
+        <input type="number" class="form-control" id="pregnancies" name="pregnancies" required>
+      </div>
+      <div class="col-md-6">
+        <label for="glucose" class="form-label">Glucose</label>
+        <input type="number" class="form-control" id="glucose" name="glucose" required>
+      </div>
+      <div class="col-md-6">
+        <label for="bloodpressure" class="form-label">Blood Pressure</label>
+        <input type="number" class="form-control" id="bloodpressure" name="bloodpressure" required>
+      </div>
+      <div class="col-md-6">
+        <label for="skinthickness" class="form-label">Skin Thickness</label>
+        <input type="number" class="form-control" id="skinthickness" name="skinthickness" required>
+      </div>
+      <div class="col-md-6">
+        <label for="insulin" class="form-label">Insulin</label>
+        <input type="number" class="form-control" id="insulin" name="insulin" required>
+      </div>
+      <div class="col-md-6">
+        <label for="bmi" class="form-label">BMI</label>
+        <input type="number" step="0.1" class="form-control" id="bmi" name="bmi" required>
+      </div>
+      <div class="col-md-6">
+        <label for="dpf" class="form-label">Diabetes Pedigree Function</label>
+        <input type="number" step="0.01" class="form-control" id="dpf" name="dpf" required>
+      </div>
+      <div class="col-md-6">
+        <label for="age" class="form-label">Age</label>
+        <input type="number" class="form-control" id="age" name="age" required>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary mt-4">Predict</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<!-- Attributes Section -->
+<section class="attributes-section text-center mt-5">
+  <h2 class="mb-4">Attributes</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">Pregnancies</h5>
+            <p class="card-text">Number of times pregnant.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">Glucose</h5>
+            <p class="card-text">Plasma glucose concentration over 2 hours in an oral glucose tolerance test.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">Diastolic BP</h5>
+            <p class="card-text">Diastolic blood pressure (mm Hg).</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">Skin Thickness</h5>
+            <p class="card-text">Measures the layer of fat just under the skin, in millimeters.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">Serum Insulin</h5>
+            <p class="card-text">Insulin level in blood.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">BMI</h5>
+            <p class="card-text">Body Mass Index (weight in kg/(height in m)^2).</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">Age</h5>
+            <p class="card-text">Age in years.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="background-color: #e0f7fa;">
+          <div class="card-body">
+            <h5 class="card-title">Diabetes Pedigree</h5>
+            <p class="card-text">Likelihood of diabetes based on family history.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center text-white pt-4" style="background-color: #1a73e8; padding: 20px;">
+
+  <p>&copy; 2024 Diapredict. All rights reserved.</p>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
